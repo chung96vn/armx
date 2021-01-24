@@ -28,11 +28,11 @@ fi
 #setup nfs-kernel-server
 apt-get update
 apt-get install nfs-kernel-server -y
-chown -R nobody:nogroup /armx
 if ! grep -q "/armx" /etc/exports; then
     echo "/armx             192.168.100.0/24(rw,sync,no_subtree_check)" >> /etc/exports
 fi
+cd /armx/hostfs
+unzip hostfs.ext2.zip
+chown -R nobody:nogroup /armx
 exportfs -a
 service nfs-kernel-server restart
-
-
